@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="sk">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-signin-client_id" content="166958530572-hd6cajenv9ebrhb3m7o05ttk9lka6oue.apps.googleusercontent.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <title>Úloha 2</title>
+    <link rel="stylesheet" href="screenStyle.css">
+    <link rel="stylesheet" href="public/printStyle.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="script.js"></script>
+
+    <style>
+      .navbar .icon {
+        display: none;
+      }
+      @media screen and (max-width: 750px) {
+      .navbar a:not(:first-child) {display: none;}
+      .navbar a.icon {
+        float: right;
+        position: absolute;
+        top: 0;
+        right: 0;
+        display: block;
+        font-size: 30px;
+      }
+
+      .navbar{
+        min-height: 60px;
+      }
+    }
+
+    @media screen and (max-width: 750px) {
+      .navbar.responsive {position: relative;}
+      .navbar.responsive .icon {
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+
+      .navbar .logo{
+        width: 100%;
+      }
+
+      .navbar.responsive a {
+        float: none;
+        display: block;
+        text-align: center;
+      }
+
+
+      .navbar a img{
+        width: 20%;
+      }
+
+      .abcRioButton{
+        margin: auto;
+        margin-bottom: 4%;
+      }
+    }
+
+    </style>
+    
+  </head>
+  <body onload = time();>
+    <div class="content">
+      <nav class="mainpage navbar" id="menuIts">
+        <a href="#welcome" class="logo">
+          <img src="fig/try.png" alt="">
+        </a>
+
+        <a href="#welcome">DOMOV</a>
+        <a href="#articles/1/100">ČLÁNKY</a>
+        <a href="#artInsert">PRIDAŤ ČLÁNOK</a>
+        <a href="#opinions">NÁZORY</a>
+        <a href="#addOpinion">PRIDAŤ NÁZOR</a>
+        
+        <div id="g_id_onload" data-client_id="166958530572-hd6cajenv9ebrhb3m7o05ttk9lka6oue.apps.googleusercontent.com"
+            data-auto_prompt="false" data-callback="onSignIn">
+        </div>
+        <div id="auth-container" style="display: flex; justify-content: center;">
+            <div class="g_id_signin" data-type="standard" data-size="medium" data-theme="outline"
+                data-text="sign_in_with" data-shape="rectangular" data-logo_alignment="left">
+            </div>
+        </div>
+
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+          <i class="fa fa-bars"></i>
+        </a>
+        
+      </nav>
+
+      <div id="router-view">
+      </div>
+    </div>
+
+    <script id="template-welcome" type="text/template">
+      <div class="background">
+        <h2>Športové novinky</h2>
+        <p>Jeden blog, rovnaká vášeň, nekonečné príbehy výziev a víťazstiev</p>
+      </div>
+      <div class="aboutus">
+        <p class="welcome">
+          Vitajte na našom blogu plnom sviežich informácií a vzrušujúcich noviniek zo športového sveta! Dennodenne vás budeme aktualizovať o najnovších udalostiach, zaujímavých momentoch a výsledkoch, ktoré formujú fascinujúci svet športu. Sledujte nás a buďte vždy v kroku s tým, čo sa deje na ihriskách, štadiónoch a v športových arénach po celom svete.
+        </p>
+      </div>
+      
+    </script>
+
+    <script id="template-articles" type="text/template">
+      {{#articles}}
+      <article>
+          <h2><a href="{{detailLink}}">{{title}}</a></h2>
+          <p>
+          by {{author}}
+          </p>
+          <p>
+            {{{content}}}
+          </p>
+      </article>
+      {{/articles}}
+
+      <div class="pagination">
+        {{#prevPage}}
+        <div class="btn-primary">
+          <a href="#articles/{{prevPage}}/{{pageCount}}">
+            Predošlá stránka
+          </a>
+        </div>
+        {{/prevPage}}
+
+        {{#nextPage}}
+        <div class="btn-primary">
+          <a href="#articles/{{nextPage}}/{{pageCount}}" >
+            Nasledujúca stránka
+          </a>
+        </div>
+        {{/nextPage}}
+      </div>
+  
+    </script>
+
+    <script id="template-articles-error" type="text/template">
+
+      <article>
+          <h2>Articles acquisition failed</h2>
+          <p>
+              {{errMessage}}
+          </p>
+      </article>
+      <footer  class="menuLink"><a href="#menuTitle">Back to the menu</a></footer>
+  
+  </script>   
+  
+  <script id="template-opinions" type="text/template">
+    <h2 class="title">Napísali o nás...</h2>
+    <div id="artOpinions" class="opinionItem">
+      {{#.}}
+      <div>
+        <h4>Používateľ: {{name}}</h4>
+        <p>{{email}}</p>
+        {{#url}}
+          <img src="{{url}}" alt="obrázok">
+        {{/url}}
+        {{#recommendation}}
+          <h5>Odporúčil by stránku známym?</h5>
+          <p>{{recommendation}}</p>
+        {{/recommendation}}
+        
+        {{#futbal}}
+            <span>má rád futbal</span>
+        {{/futbal}}
+        {{#hokej}}
+            <span>má rád hokej</span>
+        {{/hokej}}
+        {{#tenis}}
+            <span>má rád tenis</span>
+        {{/tenis}}
+        {{#iné}}
+            <span>má rád iné športy</span>
+        {{/iné}}
+               
+        <h5>Názor na stránku</h5>
+        <p class="opinion">{{opinion}}</p>
+        {{#array}}
+          <h5>Najviac sa mu páči</h5>
+          <p>{{array}}</p>
+        {{/array}}
+        <i>{{createdDate}}</i>
+      </div>
+      {{/.}}
+      {{^.}}
+      <section>
+          Sorry, no opinions found.
+      </section>
+      {{/.}}
+  </div>
+  </script>     
+  
+  <script id="template-addOpinion" type="text/template">
+      <div  id="artOpnFrm">          
+          <form id="opnFrm">
+            <fieldset>Váš názor na stránku</fieldset>
+            <span>*</span><input type="text" id="name" placeholder="Zadaj meno" maxlength="20" pattern="[^0-9].*" title="Max. 20 znakov, meno nesmie začínať číslom">
+            <br>
+            <span>*</span><input type="email" id="email" placeholder="Zadaj e-mail" maxlength="30" title="Max. 30 znakov">
+            <input type="url" id="url" placeholder="Vlož URL obrázka">
+            <label>Odporúčili by ste stránku svojim známym?</label>
+            <br>
+            <input type="radio" name="recommendation" id="Áno" value="Áno">
+            <label for="Áno">Áno</label>
+            <br>
+            <input type="radio" name="recommendation" id="Nie" value="Nie">
+            <label for="Nie">Nie</label>
+            <br>
+            <br>
+            <label>Obľúbené športy</label>
+            <br>
+            <input type="checkbox" id="Futbal" name="Futbal" value="Futbal">
+            <label for="Futbal">Futbal</label>
+            <br>
+            <input type="checkbox" id="Hokej" name="Hokej" value="Hokej">
+            <label for="Hokej">Hokej</label>
+            <br>
+            <input type="checkbox" id="Tenis" name="Tenis" value="Tenis">
+            <label for="Tenis">Tenis</label>
+            <br>
+            <input type="checkbox" id="Iné" name="Iné" value="Iné">
+            <label for="Iné">Iné</label>
+            <br>
+            <span>*</span>
+            <textarea rows="4" id="opinion" placeholder="Napíš svoj názor..."></textarea>
+            <input type="text" list="keywords" name="array" placeholder="Najviac sa mi páči (kľúčové slová...)">
+            <datalist id="keywords">
+              <option value="šport">
+              <option value="novinky">
+              <option value="extraliga">
+              <option value="výsledky">
+            </datalist>
+            <button type="submit" class="form_button">Odoslať</button>
+            <button type="reset" class="form_button">Zresetovať</button>
+          </form>
+         
+      </article>
+    </script> 
+
+    <script id="template-article" type="text/template">
+      <article>
+          <h3>{{title}}</h3>
+          <p>
+              by {{author}}
+          </p>
+          {{#imageLink}}
+          <figure>
+              <img src="{{imageLink}}" alt="article figure" />
+          </figure>
+          {{/imageLink}}
+          <div>{{{content}}}</div>
+          <p>
+              Keywords:
+              {{tags}}
+          </p>
+      </article>
+
+      <div class="buttons">
+        <a href="{{backLink}}" class="btn-primary"><< Back</a>
+        <a href="{{editLink}}" class="btn-primary">Edit</a>
+        <a href="{{deleteLink}}" class="btn-primary">Delete</a>
+        <a href="#menuTitle" class="btn-primary">Up to the menu</a>
+      </div>
+
+
+      <div class="comments">
+        <h4>Komentáre</h4>
+        <a href="#addComment/{{id}}">Pridať nový komentár</a>
+      </div>
+      <div id="comments">
+
+      </div>
+  
+      
+  
+    </script> 
+    
+    <script id="template-article-form" type="text/template">
+      <article>
+          <h2>{{formTitle}}</h2> <br><br>
+  
+          <form id="articleForm">
+              <label for="author">Author:</label>
+              <input type="text" name="author" id="author" value="{{author}}" size="50" 
+                     title="Article author, max. length 100 characters." 
+                     maxlength="100" placeholder="autor článku" />
+              <br>
+              <label for="title">Title:</label>
+              <input type="text" name="title" id="title" value="{{title}}" size="50"  
+                     maxlength="100" pattern="\S[\S\s]*" placeholder="názov článku" required 
+                     title="Article title, mandatory item, max. length: 100 characters. 
+  The first character must not be a space."  />
+              <br>
+              <label for="imageLink">Image (url):</label>
+              <input type="url" name="imageLink" id="imageLink" value="{{imageLink}}" size="50" 
+                     title="Image URL, max. length 100 characters." maxlength="100"/>
+              <br>
+              <label></label>
+              <button type="button" id="btShowFileUpload" class="btn-primary">
+                  Upload image
+              </button>
+  
+              <fieldset class="added hiddenElm" id="fsetFileUpload">
+                  <legend>Image Upload</legend>
+                  <input type="file" id="flElm" name="file" accept="image/jpeg, image/png"/>
+                  <br />
+                  <button type="button" id="btFileUpload" class="btn-primary">
+                      Send image to server </button>
+                  <button type="button" id="btCancelFileUpload" class="btn-primary">
+                      Cancel uploading </button>
+              </fieldset>
+  
+  
+              <br>
+              <label for="content">Article content:</label>
+              <textarea
+                      name="content" id="content" spellcheck="true" lang="sk"
+                      cols="50" rows="10" required
+                      title="Article content, mandatory item, can be plain text or in HTML.">
+                {{content}}
+              </textarea>
+              <br>
+              <label for="tags">Keywords:</label>
+              <input  type="text" name="tags" id="tags" value="{{tags}}" size="50"
+                      title="Keyword list, comma separated." placeholder="e.g. village, drama" />
+              <br> <br>
+              <button type="reset"> Reset Form </button>
+              <button type="submit"> {{submitBtTitle}} </button>
+  
+          </form>
+      </article>
+  
+      <footer>
+          <a href="{{backLink}}" class="linkAsButton"><< Back</a>
+          <a href="#menuTitle" class="linkAsButton">Up to the menu</a>
+      </footer>
+    </script>  
+
+    <script id="template-comments" type="text/template">
+
+          <div>
+              <div id="commentsContainer">
+                  {{#comments}}
+                  <div class="opinion">
+                      <h4 class="name">Meno: {{author}}</h4>
+                      <div class="date">{{created_on}}</div>
+                      <p class="opinion-content">{{text}}</p>
+                  </div>
+                  {{/comments}}
+  
+  
+                  {{#isPrev}}
+                  <a href="#artComment/{{offsetPrev}}" class="btn btn-primary">
+                      Predošlá stránka
+                  </a>
+                  {{/isPrev}}
+  
+                  {{#offsetNext}}
+                  <a href="#artComment/{{offsetNext}}" class="btn btn-primary">
+                      Nasledujúca stránka
+                  </a>
+                  {{/offsetNext}}
+              </div>
+          </div>
+  </script>
+  
+  <script id="template-comments-add" type="text/template">
+  
+
+          <div class="container">
+              <form id="commentFrm" style="width:100%;">
+                  <div class="row">
+                      <div class="col-xl-6">
+  
+                          <div class="form-group">
+                              <label for="nameCommentFrm">Meno</label>
+                              <input type="text" name="name" id="nameCommentFrm" class="form-control"
+                                     placeholder="Meno...">
+                          </div>
+                      </div>
+                      <div class="col-xl-6">
+                          <div class="form-group">
+                              <label for="surnameCommentFrm">Priezvisko</label>
+                              <input type="text" name="surname" class="form-control" id="surnameCommentFrm"
+                                     placeholder="Priezvisko...">
+                          </div>
+                      </div>
+                  </div>
+  
+                  <div class="form-group">
+                      <label for="contentCommentFrm">Text *</label>
+                      <textarea name="text" id="contentCommentFrm" class="form-control" required></textarea>
+                      <div class="error-input">Políčko váš názor je povinné!</div>
+                  </div>
+  
+                  <div class="form-group">
+  
+                      <button class="btn btn-primary">Odoslať</button>
+                  </div>
+              </form>
+          </div>
+  </script>
+
+    <script id="template-artInsert" type="text/template">
+      <article>
+        <h2>{{formTitle}}</h2> <br><br>
+
+        <form id="articleForm">
+            <label for="author">Author:</label>
+            <input type="text" name="author" id="author" value="{{author}}" size="50" 
+                   title="Article author, max. length 100 characters." 
+                   maxlength="100" placeholder="autor článku" />
+            <br>
+            <label for="title">Title:</label>
+            <input type="text" name="title" id="title" value="{{title}}" size="50"  
+                   maxlength="100" pattern="\S[\S\s]*" placeholder="názov článku" required 
+                   title="Article title, mandatory item, max. length: 100 characters. 
+The first character must not be a space."  />
+            <br>
+            <label for="imageLink">Image (url):</label>
+            <input type="url" name="imageLink" id="imageLink" value="{{imageLink}}" size="50" 
+                   title="Image URL, max. length 100 characters." maxlength="100"/>
+            <br>
+            <label></label>
+            <button type="button" id="btShowFileUpload" class="btn-primary">
+                Upload image
+            </button>
+
+            <fieldset class="added hiddenElm" id="fsetFileUpload">
+                <legend>Image Upload</legend>
+                <input type="file" id="flElm" name="file" accept="image/jpeg, image/png"/>
+                <br />
+                <button type="button" id="btFileUpload" class="btn-primary" style="margin:2%">
+                    Send image to server </button>
+                <button type="button" id="btCancelFileUpload" class="btn-primary">
+                    Cancel uploading </button>
+            </fieldset>
+
+
+            <br>
+            <label for="content">Article content:</label>
+            <textarea
+                    name="content" id="content" spellcheck="true" lang="sk"
+                    cols="50" rows="10" required
+                    title="Article content, mandatory item, can be plain text or in HTML.">
+              {{content}}
+            </textarea>
+            <br>
+            <label for="tags">Keywords:</label>
+            <input  type="text" name="tags" id="tags" value="{{tags}}" size="50"
+                    title="Keyword list, comma separated." placeholder="e.g. village, drama" />
+            <br> <br>
+            <button type="reset" class="btn-primary"> Reset Form </button>
+            <button type="submit" class="btn-primary"> {{submitBtTitle}} </button>
+
+        </form>
+    </script> 
+
+    <footer>
+      <a href="mailto:jakub.szabados@student.tuke.sk"><p>Copyright © 2023 Jakub Szabados</p>
+        <p>jakub.szabados@student.tuke.sk</p>
+      </a>
+
+      <p id="date"></p>
+    </footer>
+
+    
+    <script  type="module" src="js/index.js"></script>
+    <script src="js/articleFormsHandler.js"></script> 
+
+    <script>
+
+      if (window.localStorage.getItem("authGoogle")?.length > 0) {
+          const userdata = JSON.parse(window.localStorage.getItem("authGoogle"))
+          window.localStorage.setItem("authGoogle", JSON.stringify(userdata))
+          document.querySelector("#auth-container").innerHTML = `<div class="authInfoContainer">  <p style="margin-left:10%;">${userdata.given_name}</p> <button class="btn-primary" id="signout_button" style="padding:5%;">Sign Out</button></div>`
+          const button = document.getElementById("signout_button");
+          button.onclick = signOut;
+      }
+
+      function parseJwt(token) {
+          var base64Url = token.split('.')[1];
+          var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+          var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function (c) {
+              return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+          }).join(''));
+
+          return JSON.parse(jsonPayload);
+      }
+
+      function onSignIn(googleUser) {
+          console.log(parseJwt(googleUser.credential));
+          const userdata = parseJwt(googleUser.credential)
+          window.localStorage.setItem("authGoogle", JSON.stringify(userdata))
+          document.querySelector("#auth-container").innerHTML = `<div class="authInfoContainer"> <p style="margin-left:10%;">${userdata.given_name}</p> <button class="btn-primary" id="signout_button" style="padding:5%;>Sign Out</button></div>`
+          const button = document.getElementById("signout_button");
+          button.onclick = signOut;
+      }
+
+      function signOut() {
+          window.localStorage.removeItem("authGoogle")
+          document.querySelector("#auth-container").innerHTML = `<div class="g_id_signin" data-type="standard" data-size="medium" data-theme="outline"
+              data-text="sign_in_with" data-shape="rectangular" data-logo_alignment="left">
+          </div>`
+          location.reload();
+      }
+
+  </script>
+
+    <script>
+      function myFunction() {
+        var x = document.getElementById("menuIts");
+        if (x.className === "navbar") {
+          x.className += " responsive";
+        } else {
+          x.className = "navbar";
+        }
+      }
+    </script>
+
+  </body>
+</html>

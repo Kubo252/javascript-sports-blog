@@ -1,0 +1,29 @@
+@media print {
+    body{
+        /*background-color: white;*/
+        font-family: serif !important;
+    }
+
+    section h2, section ol, a, picture, footer, .grid-container, .btn-primary{
+        display: none;
+    }
+
+    main{
+        width: 90%;
+    }
+
+    .table-h2{
+        margin-top: 30%;
+    }
+
+    table{
+        border: 2px solid black;
+        box-shadow: none;
+    }
+
+}
+
+
+/*@page {
+    margin: 0;
+}*/

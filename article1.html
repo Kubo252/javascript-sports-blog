@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="sk">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Úloha 2</title>
+    <link rel="stylesheet" href="screenStyle.css">
+    <link rel="stylesheet" href="public/printStyle.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="script.js"></script>
+  </head>
+  <body onload = time();>
+    <div class="content">
+      <nav>       
+          <div class="btn-primary"><a href="index.html" class="homepage">Hlavná stránka</a></div>
+      </nav>
+
+      <main>
+        <header>
+          <h1 class="title">Tréner Košíc Ceman chváli extraligu i súperov. Pre súťaž je to výborné, tvrdí</h1>
+        </header>
+
+        <article>
+          <h5>HOKEJ</h5>
+          <p class="text">Obhajca titulu vstúpil do sezóny podľa očakávania – dvoma výhrami. Ďalšie dva zápasy si však hokejisti HC Košice za klobúk nedajú. V Poprade prehrali úvodnú tretinu zahanbujúco 0:5 (celkovo 2:7), v Nových Zámkoch nestrelili ani gól a domácim podľahli 0:3. </p>
+          <p class="text">Proti Liptovskému Mikulášu sa potrebovali rehabilitovať. Nešlo však o Liptákov z dna tabuľky, ako tomu bolo v predchádzajúcich sezónach. Na druhej strane stál súper, ktorý uspel v troch zo štyroch stretnutí. </p>
+          <img src="fig/vysledky.jpg" alt="vysledky">
+        </article>
+
+        <picture>
+          <source media="(min-width:900px)" srcset="fig/logo.png">
+          <source media="(min-width:700px)" srcset="fig/logo2.png">
+          <img src="fig/logo3.jpg" alt="" style="width: 10%;">
+        </picture>
+      </main>          
+
+      <section class="article1">
+        <h2>Prečítajte si aj</h2>
+        <ol>
+          <li><a href="article2.html">Traťový rekord padol! 100. ročník Medzinárodného maratónu mieru v Košiciach ovládol Keňan Rono</a></li>
+          <li><a href="article3.html">Na farmu odišli ďalší dvaja Slováci, v prípravných kempoch ich skončilo už sedem</a></li>
+          <li>Matej Tóth má za sebou premiéru v maratóne. Získal motiváciu navyše, s časom je spokojný</li>
+        </ol>
+      </section>
+      
+      <h2>Menu</h2>
+      <ul class="menu">
+        <li>Futbal</li>
+        <li>Hokej</li>
+        <li>Tenis</li>
+      </ul>
+
+      <h2 class="table-h2">Tabuľka</h2>
+      <table>
+          <caption>TIPOS Extraliga</caption>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Tím</th>
+              <th>Zápasy</th>
+              <th>Body</th>
+            </tr>            
+          </thead>
+
+          <tbody>
+            <tr>
+              <td>1.</td>
+              <td>Zvolen</td>           
+              <td>5</td>
+              <td>13</td>
+            </tr> 
+            <tr>
+              <td>2.</td>
+              <td>Spišská Nová Ves</td>
+              <td>5</td>
+              <td>13</td>
+            </tr> 
+            <tr>
+              <td>3.</td>
+              <td>Nové Zámky</td>
+              <td>5</td>
+              <td>9</td>
+            </tr> 
+            <tr>
+              <td>4.</td>
+              <td>Michalovce</td>
+              <td>5</td>
+              <td>8</td>
+            </tr>     
+          </tbody>
+
+          <tfoot>
+            <tr>
+              <td colspan="4">Ak tímy skončia na konci súťaže s rovnakým počtom bodov, rozhodujúce sú vzájomné zápasy</td>
+            </tr>
+          </tfoot>
+      </table>  
+    </div>
+
+    <footer>
+      <p>
+        Náš blog vám bude každodenne prinášať najnovšie novinky a výsledky zo sveta športu.
+      </p> 
+
+      <a href="mailto:jakub.szabados@student.tuke.sk"><p>Copyright © 2023 Jakub Szabados</p>
+        <p>jakub.szabados@student.tuke.sk</p>
+      </a>
+
+      <p id="date"></p>
+    </footer>
+
+  </body>
+</html>
